@@ -1,0 +1,211 @@
+\documentclass[$if(fontsize)$$fontsize$$else$11pt$endif$,$for(classoption)$$classoption$$sep$,$endfor$]{article}
+
+% Encoding and fonts
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Geometry
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+
+% Spacing
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{parskip}
+
+% Colours - UCD Navy
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\definecolor{ucdnavy}{HTML}{002B5C}
+\definecolor{ucdgold}{HTML}{C4A64E}
+\definecolor{ucdlightgrey}{HTML}{F2F2F2}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{ucdnavy}}{\thesection}{1em}{}[\color{ucdgold}\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{ucdnavy}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{ucdnavy}}{\thesubsubsection}{1em}{}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{ucdnavy}\textit{$if(subtitle)$$subtitle$$endif$}}
+\fancyhead[R]{\small\color{ucdnavy}\textit{CHEN40140}}
+\fancyfoot[C]{\small\color{ucdnavy}\thepage\ / \pageref{LastPage}}
+\fancyfoot[R]{\small\color{ucdnavy}Dr Colin Clarke}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{ucdnavy}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{ucdnavy}\leaders\hrule height \footrulewidth\hfill}}
+
+% Title page style (no headers)
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\small\color{ucdnavy}\thepage\ / \pageref{LastPage}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% Graphics
+\usepackage{graphicx}
+
+% Tables
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=2pt,itemsep=1pt}
+\setlist[enumerate]{topsep=2pt,itemsep=1pt}
+
+% Hyperlinks
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=ucdnavy,
+  urlcolor=ucdnavy,
+  citecolor=ucdnavy,
+  pdftitle={$if(title)$$title$$endif$},
+  pdfauthor={Dr Colin Clarke},
+  breaklinks=true
+}
+
+% Blockquote styling
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\renewenvironment{quote}{%
+  \begin{tcolorbox}[
+    breakable,
+    enhanced,
+    colback=ucdlightgrey,
+    colframe=ucdnavy,
+    leftrule=3pt,
+    rightrule=0pt,
+    toprule=0pt,
+    bottomrule=0pt,
+    arc=0pt,
+    outer arc=0pt,
+    left=8pt,
+    right=8pt,
+    top=6pt,
+    bottom=6pt
+  ]
+}{%
+  \end{tcolorbox}
+}
+
+% Code/verbatim
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\small}
+
+% Tight list support (pandoc)
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Scale images
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+% Task lists (checkbox support)
+\usepackage{amssymb}
+\newcommand{\checkbox}[1]{%
+  \ifx&#1&%
+    \ensuremath{\square}%
+  \else%
+    \ensuremath{\boxtimes}%
+  \fi%
+}
+
+% Table of contents styling
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\color{ucdnavy}\bfseries}
+\renewcommand{\cftsubsecfont}{\color{ucdnavy}}
+\renewcommand{\cftsecpagefont}{\color{ucdnavy}\bfseries}
+\renewcommand{\cftsubsecpagefont}{\color{ucdnavy}}
+\renewcommand{\cftsecleader}{\color{ucdnavy}\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforesecskip}{4pt}
+
+% =====================
+% TITLE PAGE
+% =====================
+\newcommand{\maketitlepage}{%
+  \begin{titlepage}
+    \thispagestyle{empty}
+    \begin{center}
+      \vspace*{1cm}
+
+      % Logo
+      $if(logo)$
+      \includegraphics[width=5cm]{$logo$}
+      $endif$
+
+      \vspace{1cm}
+
+      {\large\color{ucdnavy}\textsc{University College Dublin}}\\[4pt]
+      {\normalsize\color{ucdnavy}\textsc{School of Chemical and Bioprocess Engineering}}\\[4pt]
+      {\normalsize\color{ucdnavy}\textsc{College of Engineering and Architecture}}
+
+      \vspace{1.5cm}
+
+      {\color{ucdgold}\rule{\textwidth}{1.5pt}}
+
+      \vspace{0.8cm}
+
+      {\LARGE\bfseries\color{ucdnavy} $if(title)$$title$$endif$}
+
+      \vspace{0.5cm}
+
+      $if(subtitle)$
+      {\large\color{ucdnavy} $subtitle$}
+      $endif$
+
+      \vspace{0.8cm}
+
+      {\color{ucdgold}\rule{\textwidth}{1.5pt}}
+
+      \vspace{1.5cm}
+
+      {\large\color{ucdnavy}\textbf{CHEN40140 --- Biopharmaceutical Engineering Project}}\\[8pt]
+      {\normalsize\color{ucdnavy}MEngSc in Biopharmaceutical Engineering (T070)}\\[4pt]
+      {\normalsize\color{ucdnavy}NFQ Level 9 --- 30 Credits --- Summer Trimester}
+
+      \vspace{1.5cm}
+
+      {\normalsize\color{ucdnavy}\textbf{Module Coordinator: Dr Colin Clarke}}
+
+      \vfill
+
+      {\small\color{ucdnavy}$if(date)$$date$$else$Academic Year 2025/2026$endif$}
+
+    \end{center}
+  \end{titlepage}
+}
+
+% =====================
+% DOCUMENT
+% =====================
+\begin{document}
+
+% Title page
+\maketitlepage
+
+% Table of contents
+$if(toc)$
+\newpage
+\thispagestyle{plain}
+{\color{ucdnavy}\tableofcontents}
+\newpage
+$endif$
+
+% Body
+$body$
+
+\end{document}

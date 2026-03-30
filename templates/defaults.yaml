@@ -1,0 +1,13 @@
+from: markdown+pipe_tables+strikeout+task_lists+smart+yaml_metadata_block
+to: pdf
+pdf-engine: pdflatex
+template: templates/ucd_template.tex
+toc: true
+toc-depth: 3
+number-sections: false
+highlight-style: tango
+variables:
+  documentclass: article
+  fontsize: 11pt
+  geometry: "margin=2.5cm"
+  logo: "assets/ucd_logo.png"
