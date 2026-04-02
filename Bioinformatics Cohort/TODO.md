@@ -1,7 +1,7 @@
 # CHEN40140 Bioinformatics Cohort — TODO List
 ## Dr Colin Clarke
 
-*Last updated: 1 April 2026*
+*Last updated: 2 April 2026*
 
 ---
 
@@ -14,6 +14,12 @@
 - [ ] **Project 47 (Thalen et al. 2024)** — No public accession found. Industry involvement (SOBI AB/KTH). Contact corresponding author. If data unavailable, identify alternative sulfatase-producing CHO RNA-seq dataset.
 
 - [ ] **Projects 32, 38 (Tanemura et al. 2022)** — GEO accession GSE197570 exists but SE/PE layout not confirmed. Check SRA Run Selector to determine library layout and assign correct Galaxy workflow (SE or PE).
+
+---
+
+### Input File Format — Standardisation
+
+- [ ] **Unify input file format across all workflows to either CSV or TSV.** Currently Stage 1 SE uses tab-delimited (`sample_info.txt`) and Stage 1 PE uses comma-separated (`sample_names.txt`). Pick one format and apply it consistently across all stages and workflows — update workflow `.ga` files (Cut tool delimiter), student guides, and sample file templates accordingly.
 
 ---
 

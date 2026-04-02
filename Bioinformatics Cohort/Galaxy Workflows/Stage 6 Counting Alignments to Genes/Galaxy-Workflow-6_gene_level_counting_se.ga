@@ -1,0 +1,236 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "a workflow to count aligned reads",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "name": "Colin Clarke"
+        }
+    ],
+    "format-version": "0.1",
+    "name": "6_gene_level_counting_se",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "gtf"
+                }
+            ],
+            "label": "gtf",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 120.00000325401363
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"gtf\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "b7d7cae9-ab03-427e-98b2-5c0e0e32f7e1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "bam"
+                }
+            ],
+            "label": "bam",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 300,
+                "top": 3.25401362769222e-06
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"bam\"], \"tag\": null, \"collection_type\": \"list\", \"fields\": null, \"column_definitions\": null}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "6737585e-06fd-47db-8979-15458f2dafb2",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "CONVERTER_gz_to_uncompressed",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input1": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert gz compressed file to uncompressed.",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "auto"
+                }
+            ],
+            "position": {
+                "left": 300,
+                "top": 120.00000325401363
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput1": {
+                    "action_arguments": {
+                        "newtype": "gtf"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output1"
+                },
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "CONVERTER_gz_to_uncompressed",
+            "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "f163f179-faee-4a0b-b246-33834288db43",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/lparsons/htseq_count/htseq_count/2.0.9+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "gfffile": {
+                    "id": 2,
+                    "output_name": "output1"
+                },
+                "samfile": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "htseq-count",
+            "outputs": [
+                {
+                    "name": "counts",
+                    "type": "tabular"
+                },
+                {
+                    "name": "allcounts",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 600,
+                "top": 3.25401362769222e-06
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/lparsons/htseq_count/htseq_count/2.0.9+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "8f6836089479",
+                "name": "htseq_count",
+                "owner": "lparsons",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_options\": {\"advanced_options_selector\": \"simple\", \"__current_case__\": 0}, \"featuretype\": \"exon\", \"gfffile\": {\"__class__\": \"ConnectedValue\"}, \"idattr\": \"gene_id\", \"minaqual\": \"10\", \"mode\": \"union\", \"reference_source\": {\"reference_source_selector\": \"\", \"__current_case__\": 0}, \"samfile\": {\"__class__\": \"ConnectedValue\"}, \"stranded\": \"yes\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.0.9+galaxy0",
+            "type": "tool",
+            "uuid": "2d2cc101-42b7-46bf-a0b0-d5c854a9d0bc",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_list": {
+                    "id": 3,
+                    "output_name": "counts"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Collapse Collection",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 899.9188457151705,
+                "top": 0.0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "HTSeq_counts"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                },
+                "TagDatasetActionoutput": {
+                    "action_arguments": {
+                        "tags": "counts"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "90981f86000f",
+                "name": "collapse_collections",
+                "owner": "nml",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filename\": {\"add_name\": false, \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"ConnectedValue\"}, \"one_header\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "5.1.0",
+            "type": "tool",
+            "uuid": "c718d878-55b6-4aa2-b458-902e88dd662e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "count_table",
+                    "output_name": "output",
+                    "uuid": "af5252eb-03cf-4323-9c5f-210711b27f5e"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "chen40140",
+        "rna_seq",
+        "counting",
+        "single_end"
+    ],
+    "uuid": "a0829db2-04a7-4412-906f-b9a0eabb1bea",
+    "version": 6
+}
